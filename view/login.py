@@ -6,6 +6,9 @@
 #    Oct 26, 2019 09:43:18 PM IST  platform: Windows NT
 
 import sys
+import hashlib
+sys.path.append('C:\\page\\bbms\\controller')
+import login_Check
 
 try:
     import Tkinter as tk
@@ -46,8 +49,11 @@ def destroy_login():
 
 class login:
     def loginUser(self):
-        print(self.Entry1.get());
-        print(self.Entry2.get());
+        user_id = self.Entry1.get()
+        password = str(hashlib.sha256((self.Entry2.get()).encode()).hexdigest())
+        chk = login_Check.loginCheck(user_id,password)
+        print(chk[0], chk[1])
+
 
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
