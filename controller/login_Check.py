@@ -1,11 +1,19 @@
 import os
+import connector
 
 def loginCheck(user_id, password):
-	if(user_id == 'Shashankh' and password == '41c41a5db0fd0e9bbcdd3ae4b30d23bddcbc4d42f4bbd89d6e8a2c9a6c2bc986'):
-		e_code = 0
-		e_msg = "Login Successful"
+	con = connector.connector()
+	cursor = con.cursor()
+	query = """select user_type from tbl_users where user_id = \'""" + user_id + """\' and user_pass = \'""" + password + """\'"""
+	cursor.execute(query)
+	chk = False
+	for row in cursor:
+		chk = True
+	err = {}
+	if(chk):
+		err['er_no'] = row[0]
+		err['er_msg'] = 'Login Successful'
 	else:
-		e_code = 1
-		e_msg = "User ID and Password pair are incorrect"
-	return e_code,e_msg
-
+		err['er_no'] = -1;
+		err['er_msg'] = 'Login Failed. Due to invalid user_id or password';
+	return err

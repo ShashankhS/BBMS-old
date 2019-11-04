@@ -52,7 +52,7 @@ class login:
         user_id = self.Entry1.get()
         password = str(hashlib.sha256((self.Entry2.get()).encode()).hexdigest())
         chk = login_Check.loginCheck(user_id,password)
-        print(chk[0], chk[1])
+        print(chk)
 
 
     def __init__(self, top=None):
