@@ -49,6 +49,7 @@ def destroy_login():
 
 class login:
     def loginUser(self):
+        #Takes the inputs and checks whether it's the right credentials
         user_id = self.Entry1.get()
         password = str(hashlib.sha256((self.Entry2.get()).encode()).hexdigest())
         chk = login_Check.loginCheck(user_id,password)
